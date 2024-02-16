@@ -34,6 +34,8 @@ class Employee(models.Model):
         upload_to="avatar/%Y/%m/%d", null=True, blank=True)
     cvitae = models.FileField(
         upload_to="cvitae/%Y/%m/%d", null=True, blank=True)
+    type = models.ForeignKey(Type, verbose_name="Tipo",
+                             on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = 'Empleado'
