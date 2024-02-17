@@ -8,8 +8,8 @@ class Type(models.Model):
     name = models.CharField(max_length=150, verbose_name="Nombre")
 
     class Meta:
-        verbose_name = 'Tipo'
-        verbose_name_plural = 'Tipos'
+        verbose_name = "Tipo"
+        verbose_name_plural = "Tipos"
         ordering = ["id"]
 
     def __str__(self):
@@ -25,8 +25,7 @@ class Employee(models.Model):
         auto_now=True, verbose_name="Fecha Creacion")
     date_updated = models.DateTimeField(
         auto_now_add=True, verbose_name="Fecha Actualizacion")
-    age = models.PositiveIntegerField(
-        default=0, verbose_name="Edad")
+    age = models.PositiveIntegerField(default=0, verbose_name="Edad")
     salary = models.DecimalField(
         max_digits=14, decimal_places=2, default=0.00, verbose_name="Sueldo")
     state = models.BooleanField(default=True, verbose_name="Estado")
@@ -38,8 +37,8 @@ class Employee(models.Model):
                              on_delete=models.CASCADE)
 
     class Meta:
-        verbose_name = 'Empleado'
-        verbose_name_plural = 'Empleados'
+        verbose_name = "Empleado"
+        verbose_name_plural = "Empleados"
         ordering = ["id"]
 
     def __str__(self):
