@@ -46,7 +46,7 @@ class Client(models.Model):
         max_length=10, choices=gender_choices, default='male', verbose_name='Sexo')
 
     def __str__(self):
-        return self.names
+        return '{}, {}'.format(self.surnames, self.names)
 
     class Meta:
         verbose_name = 'Cliente'

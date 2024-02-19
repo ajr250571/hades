@@ -6,12 +6,15 @@ from core.erp.models import *
 admin.site.register(Category)
 
 # admin.site.register(Product)
+
+
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     '''Admin View for Product'''
+    list_display = ('id', 'name', 'cate', 'pvp',)
+    list_filter = ('cate',)
+    search_fields = ('name',)
+    ordering = ('id',)
 
-    list_display = ('name','cate','pvp',)
-    search_fields = ('',)
-    ordering = ('name',)
 
 admin.site.register(Client)
