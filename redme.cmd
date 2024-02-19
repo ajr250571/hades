@@ -1,7 +1,3 @@
-16/02/2024
-https://www.youtube.com/watch?v=pgBn-M4Jrdo
-00:53
+https://www.youtube.com/watch?v=XclfcvFjN48&list=PLxm9hnvxnn-j5ZDOgQS63UIBxQytPdCG7
 
-https://www.youtube.com/watch?v=Box_Vlr4pMA
-5:48
-
+Capitulo 19
