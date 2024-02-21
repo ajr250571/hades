@@ -1,10 +1,12 @@
-from django.http import JsonResponse
-from django.shortcuts import render
-from django.views.generic import ListView
-from core.erp.models import Category
-from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
-from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
+from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
+from django.views.decorators.csrf import csrf_protect, csrf_exempt
+from django.views.generic import ListView, CreateView
+from django.utils.decorators import method_decorator
+from core.erp.forms import CategoryForm
+from core.erp.models import Category
 
 
 def category_list(request):
@@ -12,30 +14,42 @@ def category_list(request):
         'title': 'Listado de Categorías',
         'categories': Category.objects.all()
     }
-
     return render(request, 'category/list.html', data)
 
 
 class CategoryListView(ListView):
     model = Category
-    template_name = "category/list.html"
+    template_name = 'category/list.html'
 
-    # @method_decorator(login_required)
-    # @method_decorator(csrf_exempt)
+    @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
-        # if request.method=="GET":
         return super().dispatch(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
-        data = {'name': 'Armando'}
+        data = {}
+        try:
+            data = Category.objects.get(pk=request.POST['id']).toJSON()
+        except Exception as e:
+            data['error'] = str(e)
         return JsonResponse(data)
-
-    def get_queryset(self):
-        # return Category.objects.filter(name__startswith="L")
-        return super().get_queryset()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # context['object_list']=Category.objects.all()
-        context["title"] = "Listado de Categorías"
+        context['title'] = 'Listado de Categorías'
+        context['create_url'] = reverse_lazy('erp:category_create')
+        return context
+
+
+class CategoryCreateView(CreateView):
+    model = Category
+    form_class = CategoryForm
+    template_name = 'category/create.html'
+    success_url = reverse_lazy('erp:category_list')
+
+    def post(self, request, *args, **kwargs):
+        return super().post(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Creación de Categoría'
         return context
