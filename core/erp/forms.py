@@ -38,3 +38,11 @@ class CategoryForm(forms.ModelForm):
                 }
             )
         }
+
+    def clean(self):
+        cleaned = super().clean()
+        if len(cleaned['name']) <= 50:
+            # raise forms.ValidationError('Le faltan caracteres a Nombre')
+            self.add_error('name', 'Le faltan caracteres a Nombre')
+
+        return cleaned
