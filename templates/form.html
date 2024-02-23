@@ -9,7 +9,7 @@
     </div>
     <div class="card-body">
       {% csrf_token %}
-      <input type="hidden" name="action" value="{{action}}">
+      <input type="hidden" name="action" value="{{action}}" />
 
       <!--
       {% if form.errors %}
@@ -33,7 +33,6 @@
         {{field|attr:"class:form-control"|attr:"autocomplete:off"}}
       </div>
       {% endfor %}
-
     </div>
     <div class="card-footer">
       <button type="submit" class="btn btn-primary btn-flat btnTest">
@@ -61,6 +60,7 @@
     e.preventDefault();
     var parameters = $(this).serializeArray();
 
+    {% comment %}
     $.ajax({
       url: "{% url 'erp:category_create' %}",
       type: 'POST',
@@ -77,6 +77,7 @@
     }).always(function (data) {
 
     });
+    {% endcomment %}
   });
 </script>
 {% endblock %}

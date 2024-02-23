@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, UpdateView
 from django.utils.decorators import method_decorator
 from core.erp.forms import CategoryForm
 from core.erp.models import Category
@@ -53,12 +53,8 @@ class CategoryCreateView(CreateView):
         try:
             action = request.POST['action']
             if action == 'add':
-                form = CategoryForm(request.POST)
                 form = self.get_form()
-                if form.is_valid():
-                    form.save()
-                else:
-                    data['error'] = form.errors
+                data = form.save()
             else:
                 data['error'] = 'No a ingresado a ninguna opcion.'
         except Exception as e:
@@ -71,4 +67,19 @@ class CategoryCreateView(CreateView):
         context['list_url'] = reverse_lazy('erp:category_list')
         context['entity'] = 'Categorías'
         context['action'] = 'add'
+        return context
+
+
+class CategoryUpdateView(UpdateView):
+    model = Category
+    form_class = CategoryForm
+    template_name = 'category/create.html'
+    success_url = reverse_lazy('erp:category_list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Edición de Categoría'
+        context['list_url'] = reverse_lazy('erp:category_list')
+        context['entity'] = 'Categorías'
+        context['action'] = 'edit'
         return context
