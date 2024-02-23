@@ -11,7 +11,7 @@ class Category(models.Model):
         max_length=500, verbose_name='Descripción', null=True, blank=True)
 
     def __str__(self):
-        return '{}'.format(self.name)
+        return 'ID: {} / Nombre: {}'.format(self.id, self.name)
 
     def toJSON(self):
         item = model_to_dict(self)
@@ -33,7 +33,7 @@ class Product(models.Model):
         default=0.00, max_digits=9, decimal_places=2, verbose_name='Precio')
 
     def __str__(self):
-        return self.name
+        return 'ID: {} / Nombre: {}'.format(self.id, self.name)
 
     class Meta:
         verbose_name = 'Producto'

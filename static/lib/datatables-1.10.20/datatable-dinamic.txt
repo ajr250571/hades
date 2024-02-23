@@ -1,0 +1,32 @@
+https://datatables.net/manual/ajax
+https://datatables.net/examples/ajax/
+https://datatables.net/extensions/scroller/examples/initialisation/large_js_source.html
+
+$('#tblModules').DataTable({
+responsive: true,
+autoWidth: false,
+destroy: true,
+deferRender: true,
+ajax: {
+    url: window.location.pathname
+    type: 'POST',
+    data: {}, // parametros
+    dataSrc: ""
+},
+columns: [
+    { "data": "name"},
+],
+columnDefs: [
+    {
+        targets: [2],
+        class: 'text-center',
+        orderable: false,
+        render: function (data, type, row) {
+            return data;
+        }
+    },
+],
+initComplete: function(settings, json) {
+
+  }
+});
