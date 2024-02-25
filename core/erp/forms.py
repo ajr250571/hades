@@ -1,12 +1,33 @@
-from django import forms
+from django.forms import *
+
 from core.erp.models import Category
 
 
-class CategoryForm(forms.ModelForm):
+class CategoryForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # for form in self.visible_fields():
+        #     form.field.widget.attrs['class'] = 'form-control'
+        #     form.field.widget.attrs['autocomplete'] = 'off'
+        self.fields['name'].widget.attrs['autofocus'] = True
 
     class Meta:
         model = Category
         fields = '__all__'
+        widgets = {
+            'name': TextInput(
+                attrs={
+                    'placeholder': 'Ingrese un nombre',
+                }
+            ),
+            'desc': Textarea(
+                attrs={
+                    'placeholder': 'Ingrese un nombre',
+                    'rows': 3,
+                    'cols': 3
+                }
+            ),
+        }
 
     def save(self, commit=True):
         data = {}
@@ -20,29 +41,9 @@ class CategoryForm(forms.ModelForm):
             data['error'] = str(e)
         return data
 
-        # labels = {
-        #    'name': 'Nombre Categoría',
-        #    'desc': 'Descripción Categoría',
-        # }
-
-        widgets = {
-            'name': forms.TextInput(
-                attrs={
-                    'placeholder': 'Ingrese el Nombre',
-                }
-            ),
-            'desc': forms.Textarea(
-                attrs={
-                    'placeholder': 'Ingrese la Descripcion',
-                    'rows': 5
-                }
-            )
-        }
-
     def clean(self):
         cleaned = super().clean()
         if len(cleaned['name']) <= 50:
-            # raise forms.ValidationError('Le faltan caracteres a Nombre')
-            self.add_error('name', 'Le faltan caracteres a Nombre')
-
+            # raise forms.ValidationError('Validacion xxx')
+            self.add_error('name', 'Le faltan caracteres al Nombre.')
         return cleaned

@@ -32,7 +32,7 @@
                 {% endif %}
                 {% for field in form.visible_fields %}
                     <div class="form-group">
-                        <label for="email">{{ field.label }}:</label>
+                        <label>{{ field.label }}:</label>
                         {{ field|add_class:'form-control'|attr:'autocomplete:off' }}
                     </div>
                 {% endfor %}
@@ -53,7 +53,7 @@
                 {% endfor %}
             {% endfor %}
             {% for error in form.non_field_errors %}
-                    errors += '{{ error }}\n';
+                errors += '{{ error }}\n';
             {% endfor %}
             Swal.fire({
                 title: 'Error!',
@@ -62,8 +62,7 @@
             });
         {% endif %}
 
-        /*
-        $('form').on('submit', function (e) {
+        $('#btn-flat').on('click', function (e) {
             e.preventDefault();
             var parameters = $(this).serializeArray();
             $.ajax({
@@ -84,7 +83,5 @@
 
             });
         });
-        */ 
-
     </script>
 {% endblock %}
