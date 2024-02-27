@@ -1,6 +1,6 @@
 https://www.youtube.com/watch?v=XclfcvFjN48&list=PLxm9hnvxnn-j5ZDOgQS63UIBxQytPdCG7
 
-Capitulo 40
+Capitulo 42
 
 Parámetros de objects.filter en Django
 El método objects.filter() en Django te permite filtrar un conjunto de consultas ("QuerySet") por un conjunto de criterios. Los parámetros que puedes usar en este método son:
