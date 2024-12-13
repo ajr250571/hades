@@ -1,0 +1,31 @@
+{% extends 'home.html' %}
+{% block body %}
+  <body class="wrapper">
+    {% include 'header.html' %}
+    <main class="container content my-1">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="#">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="#">Library</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Data</li>
+        </ol>
+      </nav>
+      {% block content %}
+        <div class="row">
+          <div class="col-12">
+            <h1>Contenido Principal</h1>
+            <p>Aquí va el contenido de tu página web.</p>
+          </div>
+        </div>
+      {% endblock %}
+    </main>
+    {% include 'footer.html' %}
+  </body>
+  {% block javascript %}
+
+  {% endblock %}
+{% endblock %}
